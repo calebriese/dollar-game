@@ -1,17 +1,39 @@
+import java.util.ArrayList;
 public class Vertex
 {
     int dollars;
-    Vertex[] connectedTo = new Vertex[6]; //can be connected to multiple vertices at most 6, Idk if this has to be a pointer or not?
-    //maybe use ArrayList so we can append
+    char name; //changed it from private for now but might change it back
+    ArrayList<Vertex> connectedTo = new ArrayList<Vertex>();
 
-    Vertex() { }
-    Vertex(int dollars) {
+    Vertex(int dollars, char name) {
         this.dollars = dollars;
+        this.name = name;
     }
 
-    public void setConnectedTo(Vertex connectMe) //
+    public void setConnectedTo(Vertex connectMe)
     {
-        connectedTo[0] = connectMe; // I just put this here as a placeholder
-        //maybe we could increment a counter everytime we add a new connection, or use ArrayList
+        connectedTo.add(connectMe);
+    }
+
+    public boolean isConnected(Vertex otherVertex)
+    {
+        return connectedTo.contains(otherVertex);
+    }
+    
+    public void giveDollars(){
+        this.dollars--;
+    }
+    
+    //Will add a dollar when another vertex gives
+    public void addDollars(){
+        this.dollars++;
+    }
+    
+    public char getName(){
+        return this.name;
+    }
+
+    public int getMoney(){
+        return this.dollars;
     }
 }
